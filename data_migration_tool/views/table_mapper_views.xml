@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="table_mapper_form" model="ir.ui.view">
+        <field name="name">table.mapper.form</field>
+        <field name="model">table.mapper</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Table Mapper">
+                <header>
+                    <button string="Test Connection" name="test_db_connection" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <h2>Mapping Parameters</h2>
+                    <group>
+                        <field name="name"/>
+                        <field name="mapping_mode" widget="radio"/>
+                    </group>
+                    <group name="concatenation_options" invisible="mapping_mode == 'new_records'">
+                        <field name="concatenation_active"/>
+                        <field name="concatenation_mode"/>
+                        <field name="concatenation_operator"/>
+                    </group>
+                    <group>
+                        <field name="source_table_schema_id"
+                               invisible="mapping_mode == 'existing_records_fixed'"/>
+                        <field name="odoo_model_id"/>
+                    </group>
+                    <div invisible="mapping_mode != 'existing_records'">
+                        <hr/>
+                        <group>
+                            <field name="condition" widget="radio"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="foreign_key"/>
+                            </group>
+                            <group>
+                                <field name="odoo_key" invisible="condition == 'f_key_on_tracer'"/>
+                                <field name="related_source_table"
+                                       invisible="condition == 'f_key_on_field'"/>
+                            </group>
+                        </group>
+                        <hr/>
+                    </div>
+
+                    <group>
+                        <field name="filter_source_records"/>
+                        <field name="source_record_filter_ids"
+                               invisible="filter_source_records == False"
+                               context="{'default_filter_type': 'source'}">
+                            <tree editable="top">
+                                <field name="source_table_schema_id" invisible="1"/>
+                                <field name="is_active"/>
+                                <field name="filtering_column_id"/>
+                                <field name="filtering_operator"/>
+                                <field name="filtering_value"/>
+                            </tree>
+                            <form>
+                                <field name="source_table_schema_id" invisible="1"/>
+                                <div style="display:flex; width:100%">
+                                    <label for="is_active">Is Active</label>
+                                    <field name="is_active"/>
+                                    <label style="margin-left: 2rem" for="filter_type">Filter Type</label>
+                                    <field name="filter_type" readonly="1"/>
+                                </div>
+                                <div style="display:flex; width:100%">
+                                    <div style="width:35%; margin-right:5%">
+                                        <field style="width:100%" name="filtering_column_id"
+                                               placeholder="Filtering Column"/>
+                                    </div>
+                                    <div style="width:20%; margin-right:5%">
+                                        <field style="text-align: center" name="filtering_operator"/>
+                                    </div>
+                                    <div style="width:35%;">
+                                        <field name="filtering_value" placeholder="Filtering Value"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </field>
+                    </group>
+
+
+                    <div invisible="mapping_mode == 'new_records'">
+                        <group>
+                            <field name="filter_destination_records"/>
+                            <field name="destination_record_filter_ids"
+                                   invisible="filter_destination_records == False"
+                                   context="{'default_filter_type': 'destination'}">
+                                <tree editable="bottom">
+                                    <field name="odoo_model_id" invisible="1"/>
+                                    <field name="is_active"/>
+                                    <field name="filtering_field_id"/>
+                                    <field name="filtering_operator"/>
+                                    <field name="filtering_value"/>
+                                    <field name="cast_to_integer"/>
+                                </tree>
+                                <form>
+                                    <field name="odoo_model_id" invisible="1"/>
+                                    <div style="display:flex; width:100%">
+                                        <label for="is_active">Is Active</label>
+                                        <field name="is_active"/>
+                                        <label style="margin-left: 2rem" for="filter_type">Filter Type</label>
+                                        <field name="filter_type" readonly="1"/>
+                                    </div>
+                                    <div style="display:flex; width:100%">
+                                        <div style="width:35%; margin-right:5%">
+                                            <field style="width:100%" name="filtering_field_id"
+                                                   placeholder="Filtering Field"/>
+                                        </div>
+                                        <div style="width:20%; margin-right:5%">
+                                            <field style="text-align: center" name="filtering_operator"
+                                                   placeholder="Filtering operator"/>
+                                        </div>
+                                        <div style="width:35%;">
+                                            <field name="filtering_value" placeholder="Filtering Value"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </field>
+                        </group>
+                    </div>
+                    <group>
+                        <field name="match_ids">
+                            <tree>
+                                <field name="is_active"/>
+                                <field name="name" decoration-muted="is_active == False"
+                                       decoration-bf="is_active == True"/>
+                                <field name="exclude_duplicate" decoration-muted="is_active == False"
+                                       decoration-bf="is_active == True"/>
+                                <field name="set_default_value_if_null" decoration-muted="is_active == False"
+                                       decoration-bf="is_active == True"/>
+                                <field name="convert_values" decoration-muted="is_active == False"
+                                       decoration-bf="is_active == True"/>
+                                <field name="force_casting" decoration-muted="is_active == False"
+                                       decoration-bf="is_active == True"/>
+                                <field name="force_fixed_length" decoration-muted="is_active == False"
+                                       decoration-bf="is_active == True"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <sheet>
+                    <div id="tracing_parameters"
+                         invisible="mapping_mode == 'new_records'">
+                        <h2>Tracing Parameters</h2>
+                        <group>
+                            <field name="tracing_mode"/>
+                            <field name="primary_key_column_id"/>
+                            <field name="relational_match_ids">
+                                <tree editable="bottom">
+                                    <field name="source_table_schema_id" invisible="1"/>
+                                    <field name="db_connector_id" invisible="1"/>
+                                    <field name="relational_column_id"/>
+                                    <field name="related_source_table_schema_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </div>
+                </sheet>
+                <sheet>
+                    <div id="other_parameters" invisible="mapping_mode == 'existing_records'">
+                        <h2>Record Creation Parameters</h2>
+                        <group>
+                            <group>
+                                <field name="limit_number_of_records"/>
+                                <field name="number_of_records_to_map"
+                                       invisible="limit_number_of_records == False"/>
+                                <field name="apply_offset"/>
+                                <field name="offset" invisible="apply_offset == False"/>
+                            </group>
+                            <group>
+                                <field name="record_creation_mode"/>
+                            </group>
+                        </group>
+                    </div>
+                    <button string="Import Data"
+                            name="import_data_action"
+                            type="object"
+                            class="btn-primary"
+                            invisible="mapping_mode == 'existing_records_fixed'"/>
+                    <button string="Update with Fixed Data"
+                            name="update_data_action"
+                            type="object"
+                            class="btn-primary"
+                            invisible="mapping_mode != 'existing_records_fixed'"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

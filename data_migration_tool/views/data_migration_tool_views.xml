@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_show_db_connectors" model="ir.actions.act_window">
+        <field name="name">Database Connectors</field>
+        <field name="res_model">db.connector</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record  id="action_show_source_table_schemas" model="ir.actions.act_window">
+        <field name="name">Source Table Schemas</field>
+        <field name="res_model">source.table.schema</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_show_source_table_columns" model="ir.actions.act_window">
+        <field name="name">Source Table Columns</field>
+        <field name="res_model">source.table.column</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_show_table_mappers" model="ir.actions.act_window">
+        <field name="name">Table Mappers</field>
+        <field name="res_model">table.mapper</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_show_table_mapper_groups" model="ir.actions.act_window">
+        <field name="name">Table Mapper Groups</field>
+        <field name="res_model">table.mapper.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_show_relational_helpers" model="ir.actions.act_window">
+        <field name="name">Relational Helpers</field>
+        <field name="res_model">relational.helper</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record  id="action_show_relational_helpers_m2m" model="ir.actions.act_window">
+        <field name="name">Relational Helpers M2M</field>
+        <field name="res_model">relational.helper_m2m</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="data_migration_tool_menu_root"
+              name="Data Migration Tool"
+              web_icon="data_migration_tool,static/description/icon.png"
+              groups="data_migration_tool.group_dmt_administrator"
+              sequence="30"/>
+
+    <menuitem id="connectors_tool_menu"
+              name="Connectors Tool"
+              parent="data_migration_tool_menu_root"
+              sequence="1"/>
+
+    <menuitem id="db_connectors_tool_menu"
+              name="DB Connectors"
+              parent="connectors_tool_menu"
+              sequence="1"
+              action="action_show_db_connectors"/>
+
+    <menuitem id="source_tool_menu"
+              name="Source Tool"
+              parent="data_migration_tool_menu_root"
+              sequence="2"/>
+
+    <menuitem id="source_table_schema_menu"
+              name="Source Table Schemas"
+              parent="source_tool_menu"
+              sequence="1"
+              action="action_show_source_table_schemas"/>
+
+    <menuitem id="source_table_column_menu"
+              name="Source Table Columns"
+              parent="source_tool_menu"
+              sequence="2"
+              action="action_show_source_table_columns"/>
+
+    <menuitem id="mapper_tool_menu"
+              name="Mapper Tool"
+              parent="data_migration_tool_menu_root"
+              sequence="3"/>
+
+    <menuitem id="table_mapper_menu"
+              name="Table Mappers"
+              parent="mapper_tool_menu"
+              sequence="1"
+              action="action_show_table_mappers"/>
+
+    <menuitem id="table_mapper_group_menu"
+              name="Table Mapper Groups"
+              parent="mapper_tool_menu"
+              sequence="2"
+              action="action_show_table_mapper_groups"/>
+
+    <menuitem id="relational_tool_menu"
+              name="Relational Tool"
+              parent="data_migration_tool_menu_root"
+              sequence="4"/>
+
+    <menuitem id="relational_helper_menu"
+              name="Relational Helper Many2One"
+              parent="relational_tool_menu"
+              sequence="1"
+              action="action_show_relational_helpers"/>
+
+    <menuitem id="relational_helper_m2m_menu"
+                name="Relational Helper Many2Many"
+                parent="relational_tool_menu"
+                sequence="2"
+                action="action_show_relational_helpers_m2m"/>
+
+</odoo>

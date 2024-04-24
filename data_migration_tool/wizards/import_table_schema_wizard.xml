@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="import_table_schema_wizard_form" model="ir.ui.view">
+        <field name="name">import.table.schema.wizard.form</field>
+        <field name="model">import.table.schema.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="db_connector_id"/>
+                    <field name="table_name"/>
+                </group>
+                <footer>
+                    <button string="Import Table Schema" name="import_table_schema_action" type="object"
+                            class="oe_highlight" data-hotkey="q"/>
+                    <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="import_table_schema_wizard_report" model="ir.ui.view">
+        <field name="name">import.table.schema.wizard.report</field>
+        <field name="model">import.table.schema.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <style>
+                    .modal-dialog{
+                    position:absolute;
+                    left:22vw;
+                    top:40vh;
+                    color: white;
+                    border-radius: !important 10px;
+                    }
+
+                    .modal-content{
+                    width:56vw;
+                    background-color: rgb(0, 160, 156);
+                    border-radius: 5px !important;
+                    border: 0px;
+                    box-shadow: 0 0 10px black;
+                    }
+
+                    header.modal-header{
+                    display: none;
+                    }
+
+                    main.modal-body {
+                    background-color: rgb(0, 160, 156);
+                    border-radius: 5px;
+                    }
+
+                    .o_content .o_form_view {
+                    background-color: rgb(0, 160, 156);
+                    }
+
+                    main.modal-body h2 {
+                    color: white;
+                    text-align: center;
+                    font-variant: small-caps;
+                    text-shadow: 1px 1px 0 black;
+                    font-size: 1.7rem;
+                    }
+
+                    h2 span.o_field_integer, h2 span.o_field_char {
+                    color: rgb(255, 200, 0);
+                    text-decoration: underline;
+                    }
+
+                    footer.modal-footer{
+                    border-top: 0px;
+                    }
+
+                    .modal.o_technical_modal .modal-content footer.modal-footer footer{
+                    text-align: center;
+                    }
+
+                    .modal.o_technical_modal .modal-content footer.modal-footer footer button {
+                    background-color: rgb(0, 160, 156);
+                    color: white;
+                    font-variant: small-caps;
+                    text-shadow: 1px 1px 0 black;
+                    font-size: 1.8rem;
+                    border: none;
+                    }
+                </style>
+                <h2>
+                    The schema of the table
+                    <field name="table_name" readonly="1"/>
+                    has been correctly imported
+                </h2>
+                <footer>
+                    <button string="OK" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    <button string="Show Table Schema" class="btn btn-secondary" type="object"
+                            name="show_schema_action"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="import_table_schema_wizard_action" model="ir.actions.act_window">
+        <field name="name">Import Table Schema</field>
+        <field name="res_model">import.table.schema.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="import_table_schema_wizard_menu"
+              name="Import Table Schema"
+              parent="data_migration_tool.source_tool_menu"
+              sequence="3"
+              action="import_table_schema_wizard_action"/>
+
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="source_table_schema_tree" model="ir.ui.view">
+        <field name="name">source.table.schema.tree</field>
+        <field name="model">source.table.schema</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Source Table Schema">
+                <field name="db_connector_id"/>
+                <field name="table_name"/>
+                <field name="column_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="source_table_schema_form" model="ir.ui.view">
+        <field name="name">source.table.schema.form</field>
+        <field name="model">source.table.schema</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Source Table Schema">
+                <group>
+                    <field name="db_connector_id"/>
+                    <field name="table_name"/>
+                    <field name="column_ids">
+                        <tree create="0" edit="0">
+                            <field name="name"/>
+                            <field name="column_type"/>
+                            <field name="column_null"/>
+                            <field name="column_key"/>
+                            <field name="column_default"/>
+                            <field name="column_extra"/>
+                        </tree>
+                    </field>
+                </group>
+                <button string="Map to Odoo Model" name="create_mapper_action" type="object" class="btn-primary"/>
+            </form>
+        </field>
+    </record>
+
+</odoo>

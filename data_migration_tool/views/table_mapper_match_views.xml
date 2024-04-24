@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="table_mapper_match_form" model="ir.ui.view">
+        <field name="name">table.mapper.match.form</field>
+        <field name="model">table.mapper.match</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Table Mapper">
+                <group>
+                    <field name="source_table_schema_id" invisible="1"/>
+                    <field name="odoo_model_id" invisible="1"/>
+                    <field name="table_mapper_id" invisible="1"/>
+                    <field name="mapping_mode" invisible="1"/>
+                    <field name="is_active"/>
+                </group>
+                <hr/>
+                <div id="mode">
+                    <h3 style="text-decoration: underline;">Mode</h3>
+                    <group invisible="mapping_mode == 'existing_records_fixed'">
+                        <field name="filling_mode"/>
+                        <field name="concatenation_operator" invisible="filling_mode != 'multi'"/>
+                    </group>
+                    <span invisible="mapping_mode != 'existing_records_fixed'">
+                        <strong>Fixed</strong>
+                    </span>
+                </div>
+                <hr/>
+                <div id="source">
+                    <h3 style="text-decoration: underline;">Source</h3>
+                    <group invisible="mapping_mode == 'existing_records_fixed'">
+                        <field name="source_table_column_id" invisible="filling_mode != 'single'"/>
+                        <field name="source_table_concat_column_ids"
+                               invisible="filling_mode != 'multi'"/>
+                        <field name="fixed_value" invisible="filling_mode != 'fixed'"/>
+                        <span invisible="filling_mode != 'sequence'">
+                            <b>Odoo Sequence</b>
+                        </span>
+                    </group>
+                    <group invisible="mapping_mode != 'existing_records_fixed'">
+                        <field name="fixed_value"/>
+                    </group>
+                </div>
+                <hr/>
+                <div id="destination">
+                    <h3 style="text-decoration: underline;">Destination</h3>
+                    <group>
+                        <field name="odoo_model_field_id"/>
+                    </group>
+                </div>
+                <div id="checks">
+                    <h3 style="text-decoration: underline;">Checks / Conversions / Modifications</h3>
+                    <group>
+                        <field name="exclude_duplicate"/>
+                        <field name="set_default_value_if_null"/>
+                        <field name="default_value" invisible="set_default_value_if_null == False"/>
+                        <field name="convert_values"/>
+                        <field name="match_conversion_ids" invisible="convert_values == False">
+                            <tree>
+                                <field name="original_value"/>
+                                <field name="converted_value"/>
+                            </tree>
+                        </field>
+                        <field name="force_casting"/>
+                        <field name="force_fixed_length"/>
+                        <div name="fixed_length_parameters" invisible="force_fixed_length == False">
+                            <label for="fixed_min_length" style="margin-left: 2rem">Min length:</label>
+                            <field name="fixed_min_length" style="width: 8rem;"/>
+                            <br/>
+                            <label for="fixed_max_length" style="margin-left: 2rem">Max length:</label>
+                            <field name="fixed_max_length" style="width:8rem;"/>
+                            <br/>
+                            <label for="padding_character" style="margin-left: 2rem">Padding:</label>
+                            <field name="padding_character" style="width: 8rem;"/>
+                            <br/>
+                            <label for="padding_position" style="margin-left: 2rem">Position:</label>
+                            <field name="padding_position" style="width: 8rem;"/>
+                            <br/>
+                            <label for="truncate_side" style="margin-left: 2rem">Position:</label>
+                            <field name="truncate_side" style="width: 8rem;"/>
+                            <br/>
+                        </div>
+                    </group>
+                </div>
+            </form>
+        </field>
+    </record>
+
+</odoo>

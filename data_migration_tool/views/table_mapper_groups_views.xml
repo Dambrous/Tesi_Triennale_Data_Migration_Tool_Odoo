@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="table_mapper_group_form" model="ir.ui.view">
+        <field name="name">table.mapper.group.form</field>
+        <field name="model">table.mapper.group</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Table Mapper Group">
+                <sheet>
+                    <group>
+                        <field string="Group Name" name="name"/>
+                    </group>
+                    <group>
+                        <field string="Mappers" name="table_mapper_group_line_ids">
+                            <tree editable="bottom">
+                                <field name="sequence" widget="handle"/>
+                                <field name="table_mapper_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <button string="Execute Mappers Data Import" name="mappers_data_import_action" type="object"
+                            class="btn-primary"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="table_mapper_group_tree" model="ir.ui.view">
+        <field name="name">table.mapper.group.tree</field>
+        <field name="model">table.mapper.group</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Table Mapper Group">
+                <field string="Group Name" name="name"/>
+                <field string="Mappers" name="table_mapper_group_line_ids"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

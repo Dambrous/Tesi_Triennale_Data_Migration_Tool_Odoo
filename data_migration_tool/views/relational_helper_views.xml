@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="relational_helper_form" model="ir.ui.view">
+        <field name="name">relational.helper.form</field>
+        <field name="model">relational.helper</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Relational Helper">
+                <style>
+                    .shadowed, .o_horizontal_separator{
+                        text-shadow: 1px 1px 0 black;
+                    }
+                    h2{
+                        font-size: 1.2rem;
+                    }
+                </style>
+                <sheet>
+                    <h1 style="color: #714B67; text-align: center; text-decoration: underline;" class="shadowed">Set
+                        Many2One Relation between records of the following two models:
+                    </h1>
+                    <h2 style="font-size: 1.4rem; text-align: center; color: #714B67 ;" class="shadowed">
+                        <field name="name"
+                               invisible="model_1_id == False or model_2_id == False"/>
+                    </h2>
+                    <group name="models">
+                        <group string="Model 1 (Many)" style="color: #017e84;">
+                            <field name="model_1_id"/>
+                            <field name="model_1_relational_field_id"/>
+                        </group>
+                        <group string="Model 2 (One)" style="color: #017e84">
+                            <field name="model_2_id"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group>
+                        <field name="matching_mode" widget="radio"/>
+                    </group>
+                    <group name="match_on_key_fields" invisible="matching_mode != 'key'">
+                        <group>
+                            <field name="model_1_key_field_id"/>
+                            <field name="restrict_conditions"/>
+                            <field name="matching_id_min" invisible="restrict_conditions == False"/>
+                            <field name="matching_id_max" invisible="restrict_conditions == False"/>
+                        </group>
+                        <group>
+                            <field name="model_2_key_field_id"/>
+                        </group>
+                    </group>
+                    <group name="match_on_relational_match"
+                           invisible="matching_mode != 'relational_match'">
+                        <field name="relational_match_id"/>
+                    </group>
+                    <hr/>
+                    <button string="Create Relation" class="btn btn-primary" type="object" name="set_relation_action"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="source_table_column_tree" model="ir.ui.view">
+        <field name="name">source.table.column.tree</field>
+        <field name="model">source.table.column</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Source Table Columns">
+                <field name="name"/>
+                <field name="column_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="source_table_column_form" model="ir.ui.view">
+        <field name="name">source.table.column.form</field>
+        <field name="model">source.table.column</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Source Table Column">
+                <group>
+                    <field name="name"/>
+                    <field name="column_type"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+</odoo>

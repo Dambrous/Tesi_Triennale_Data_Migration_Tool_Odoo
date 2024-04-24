@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="import_report_wizard_form" model="ir.ui.view">
+        <field name="name">import.report.wizard.form</field>
+        <field name="model">import.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Report">
+                <style>
+                    .modal-dialog{
+                        position:absolute;
+                        left:30vw;
+                        top:1vh;
+                        color: white;
+                        border-radius: !important 10px;
+                    }
+
+                    .modal-content{
+                        width:40vw;
+                        background-color: rgb(0, 160, 156);
+                        border-radius: 5px !important;
+                        border: 0px;
+                        box-shadow: 0 0 10px black;
+                    }
+
+                    header.modal-header{
+                        display: none;
+                    }
+
+                    main.modal-body {
+                        background-color: rgb(0, 160, 156);
+                        border-radius: 5px;
+                    }
+
+                    .o_form_view_container > .o_content > .o_form_renderer  {
+                        background-color: rgb(0, 160, 156);
+                    }
+
+                    main.modal-body h2 {
+                        color: white;
+                        text-align: center;
+                        font-variant: small-caps;
+                        text-shadow: 1px 1px 0 black;
+                        font-size: 1.7rem;
+                    }
+
+                    h2 span.o_field_integer, h2 span.o_field_char {
+                        color: rgb(255, 200, 0);
+                        text-decoration: underline;
+                    }
+
+                    footer.modal-footer{
+                        border-top: 0px;
+                    }
+
+                    .modal.o_technical_modal .modal-content footer.modal-footer footer{
+                        text-align: center;
+                    }
+
+                    .modal.o_technical_modal .modal-content footer.modal-footer footer button {
+                        background-color: rgb(0, 160, 156);
+                        color: white;
+                        font-variant: small-caps;
+                        text-shadow: 1px 1px 0 black;
+                        font-size: 1.8rem;
+                        border: none;
+                    }
+                </style>
+                <field name="created_records_count" invisible="1"/>
+                <field name="updated_records_count" invisible="1"/>
+                <h2 invisible="created_records_count == 0">
+                    <field name="created_records_count" readonly="1"/>
+                    <span invisible="created_records_count == 1"> records</span>
+                    <span invisible="created_records_count != 1"> record</span>
+                    of type
+                    <field name="records_model_name" readonly="1"/>
+                    <span invisible="created_records_count == 1"> have been</span>
+                    <span invisible="created_records_count != 1"> has been</span>
+                    created
+                </h2>
+                <h2 invisible="updated_records_count == 0">
+                    <field name="updated_records_count" readonly="1"/>
+                    <span invisible="updated_records_count == 1"> records</span>
+                    <span invisible="updated_records_count != 1"> record</span>
+                    of type
+                    <field name="records_model_name" readonly="1"/>
+                    <span invisible="updated_records_count == 1"> have been</span>
+                    <span invisible="updated_records_count != 1"> has been</span>
+                    updated
+                </h2>
+                <h2 invisible="created_records_count != 0 or updated_records_count != 0 or custom_message != False">
+                    Nothing created or updated
+                </h2>
+                <div invisible="custom_message == False">
+                    <h2>
+                        <field name="custom_message" readonly="1"/>
+                    </h2>
+                </div>
+                <footer>
+                    <button string="OK" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="import_report_wizard_tree" model="ir.ui.view">
+        <field name="name">import.report.wizard.tree</field>
+        <field name="model">import.report.wizard</field>
+        <field name="arch" type="xml">
+            <tree create="0" delete="0">
+                <field name="table_mapper_name" readonly="1"/>
+                <field name="records_model_name" readonly="1"/>
+                <field name="created_records_count" readonly="1"/>
+                <field name="updated_records_count" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

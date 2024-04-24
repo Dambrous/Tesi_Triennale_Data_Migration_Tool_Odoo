@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="db_connector_tree" model="ir.ui.view">
+        <field name="name">db.connector.tree</field>
+        <field name="model">db.connector</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Database Connectors">
+                <field name="name"/>
+                <field name="connector_type"/>
+                <field name="user_name"/>
+                <field name="database_name"/>
+                <field name="url_host"/>
+                <field name="password" password="True"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="db_connector_form" model="ir.ui.view">
+        <field name="name">db.connector.form</field>
+        <field name="model">db.connector</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Database Connector">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="connector_type" invisible="1"/>
+                            <field name="name"/>
+                            <field name="user_name"/>
+                            <field name="url_host"/>
+                            <field name="port"/>
+                            <field name="driver" invisible="connector_type != 'azure_db'" required="connector_type == 'azure_db'"/>
+                        </group>
+                        <group>
+                            <field name="connector_type"/>
+                            <field name="database_name"/>
+                            <field name="password" password="True"/>
+                        </group>
+                    </group>
+                    <button string="Test Connection" name="test_connection_action" type="object" class="btn-primary"/>
+                    <span style="display:inline-block; width:2rem"/>
+                    <button string="Show All Tables" name="show_all_tables_action" type="object" class="btn-primary"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

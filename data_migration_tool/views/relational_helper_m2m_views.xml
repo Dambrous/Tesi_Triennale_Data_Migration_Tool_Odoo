@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="relational_helper_m2m_form" model="ir.ui.view">
+        <field name="name">relational.helper.m2m.form</field>
+        <field name="model">relational.helper_m2m</field>
+        <field eval="100" name="priority"/>
+        <field name="arch" type="xml">
+            <form string="Relational Helper M2M">
+            <style>
+                .title-small{
+                    font-size: 1.4rem;
+                    text-align: center;
+                    color: #714B67;
+                }
+                .shadowed, .o_horizontal_separator{
+                    text-shadow: 1px 1px 0 black;
+                }
+            </style>
+                <sheet>
+                    <h1 style="color: #714B67; text-align: center; text-decoration: underline;" class="shadowed">Set M2M Relation between records of the following two models:</h1>
+                    <h2 class="title-small shadowed"><field name="name" invisible="model_1_id == False or model_2_id == False"/></h2>
+                    <group name="models">
+                        <group string="Model 1" style="color: #017e84;">
+                            <field name="model_1_id"/>
+                            <field name="model_1_relational_field_id"/>
+                        </group>
+                        <group string="Model 2" style="color: #017e84;">
+                            <field name="model_2_id"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group string="Select Pivot Table" style="color: #017e84;">
+                        <field nolable="1" name="pivot_table_id"/>
+                    </group>
+                    <hr/>
+                    <field name="pivot_table_column_ids" invisible="1"/>
+                    <group string="Model 1 Match" style="color: #017e84;">
+                        <field name="m1_pivot_col_match_id"/>
+                        <field name="model_1_matching_mode"/>
+                        <field name="model_1_key_field_id" invisible="model_1_matching_mode != 'key'"/>
+                    </group>
+                    <group string="Model 2 Match" style="color: #017e84;">
+                        <field name="m2_pivot_col_match_id"/>
+                        <field name="model_2_matching_mode"/>
+                        <field name="model_2_key_field_id" invisible="model_2_matching_mode != 'key'"/>
+                    </group>
+                    <hr/>
+                    <button string="Create Relation" class="btn btn-primary" type="object" name="set_m2m_relation_action" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
