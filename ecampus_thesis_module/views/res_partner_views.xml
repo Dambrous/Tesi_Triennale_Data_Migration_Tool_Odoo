@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Page (Migration Data) -->
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="migrated_data" string="Migrated Data">
+                    <group name="container_row_2">
+                        <group string="Migrated Data --> Utenti">
+                            <field name="migrated__utenti_id"/>
+                            <field name="migrated__utenti_cognome"/>
+                            <field name="migrated__utenti_data_nascita"/>
+                            <field name="migrated__utenti_codice_fiscale"/>
+                            <field name="migrated__utenti_sesso"/>
+                            <field name="migrated__utenti_data_iscrizione"/>
+                            <field name="migrated__utenti_stato_account"/>
+                            <field name="migrated__utenti_ultimo_accesso"/>
+                            <field name="migrated__utenti_password_hash"/>
+                            <field name="migrated__utenti_punti_fedelta"/>
+                            <field name="migrated__utenti_ruolo"/>
+                            <field name="migrated__utenti_vat"/>
+                        </group>
+                        <!-- <group string="Migrated Data IndirizziUtente">
+                            <field name="migrated__indirizziutente_tipo_indirizzo"/>
+                            <field name="migrated__indirizziutente_provincia"/>
+                            <field name="migrated__indirizziutente_nazione"/>
+                        </group>-->
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='street']" position="before">
+                <group>
+                    <field name="webfusion_indirizzi_utente_ids"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="open_indirizziutente_views" model="ir.actions.act_window">
+        <field name="name">INdirizzi Utente</field>
+        <field name="res_model">webfusion_indirizzi.utente</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="indirizziutente_menu_root"
+              name="Indirizzi Utente"
+              parent="contacts.menu_contacts"
+              action="open_indirizziutente_views"
+              sequence="1"/>
+
+</odoo>
