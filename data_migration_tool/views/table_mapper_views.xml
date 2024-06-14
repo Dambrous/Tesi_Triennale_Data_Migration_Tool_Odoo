@@ -36,9 +36,9 @@
                                 <field name="foreign_key"/>
                             </group>
                             <group>
-                                <field name="odoo_key" invisible="condition == 'f_key_on_tracer'"/>
+                                <field name="odoo_key" invisible="condition != 'f_key_on_field'"/>
                                 <field name="related_source_table"
-                                       invisible="condition == 'f_key_on_field'"/>
+                                       invisible="condition != 'f_key_on_tracer'"/>
                             </group>
                         </group>
                         <hr/>

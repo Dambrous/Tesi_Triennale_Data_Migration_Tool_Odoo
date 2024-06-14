@@ -3,7 +3,7 @@
 
 {
     "name": "Data Migration Tool",
-    "version": "17.0.1.2.0",
+    "version": "17.0.1.2.1",
     "summary": """Middleware for data migration""",
     "author": "Rapsodoo Italia",
     "website": "http://www.rapsodoo.com",
@@ -30,4 +30,10 @@
         "wizards/create_mapper_wizard.xml",
     ],
     "license": "LGPL-3",
+    "external_dependencies": {
+        "python": [
+            "mysql.connector",
+            "pymssql",
+        ],
+    },
 }

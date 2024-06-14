@@ -448,10 +448,7 @@ class TableMapper(models.Model):
     def get_relational_match_list(self, cursor):
         relational_match_dictionaries_list = []
         key_list = [
-            key
-            for key in self.relational_match_ids.mapped(
-                "relational_column_id.name"
-            )
+            key for key in self.relational_match_ids.mapped("relational_column_id.name")
         ]
 
         for row in cursor:

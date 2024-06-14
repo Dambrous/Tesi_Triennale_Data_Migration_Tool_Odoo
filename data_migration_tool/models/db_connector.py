@@ -74,7 +74,9 @@ class DatabaseConnector(models.Model):
         try:
             if self.connector_type == "mysql":
                 db_connector = self.connect_to_mysql_db()
-            elif self.connector_type == "sql_server" or self.connector_type == "azure_db":
+            elif (
+                self.connector_type == "sql_server" or self.connector_type == "azure_db"
+            ):
                 db_connector = self.connect_to_sql_server_db()
             else:
                 raise Exception()
@@ -109,18 +111,6 @@ class DatabaseConnector(models.Model):
         )
 
         return conn
-
-    def connect_to_azure_db(self):
-        db_connector = pyodbc.connect(
-            "DRIVER={};PORT=1433;SERVER={};DATABASE={};UID={};PWD={}".format(
-                self.driver,
-                self.url_host,
-                self.database_name,
-                self.user_name,
-                self.password,
-            )
-        )
-        return db_connector
 
     def show_all_tables_action(self):
         connector = self.connect()
